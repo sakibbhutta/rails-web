@@ -461,3 +461,12 @@ $ docker port b5075ed4c3f0
 3000/tcp -> [::]:3000
 ```
 14. 'docker exec' command 
+running `ls` command on container named `MyNewContainer`
+```cosole
+$ docker exec -it MyNewContainer ls
+Dockerfile  Gemfile  Gemfile.lock  Rakefile  app  bin  config  config.ru  db  docker-compose.yml  entrypoint.sh  lib  log  package.json  public  storage  test	tmp  vendor
+```
+15. 'docker attach' command  
+The "docker attach" command is used to attach your terminal to a running container. This can be useful if you want to view the output of a command running inside the container or to interact with the container's shell
+```console
+$ docker attach MyNewContainer
