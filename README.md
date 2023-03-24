@@ -211,3 +211,44 @@ aa21236f5f70   postgres       "docker-entrypoint.s…"   4 hours ago   Up 10 min
 $ docker top b5075ed4c3f0
 UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
 root                12398               12378               1                   15:16               ?                   00:00:05            puma 3.12.6 (tcp://0.0.0.0:3000) [myapp]
+
+8.  'docker stats' command 
+```console
+$ docker stats b5075ed4c3f0
+
+CONTAINER ID   NAME             CPU %     MEM USAGE / LIMIT     MEM %     NET I/O       BLOCK I/O        PIDS
+b5075ed4c3f0   MyNewContainer   0.03%     58.73MiB / 1.895GiB   3.03%     3.73kB / 0B   3.93MB / 143kB   17
+```
+9.  'docker restart' command 
+```console
+$ docker restart b5075ed4c3f0
+CONTAINER ID   IMAGE          COMMAND                  CREATED       STATUS                      PORTS                                       NAMES
+129b1c542872   rails-web      "entrypoint.sh rake …"   4 hours ago   Exited (0) 11 minutes ago                                               rails_web_run_78039bea7f1d
+b5075ed4c3f0   rails-web      "entrypoint.sh bash …"   5 hours ago   Up 15 seconds               0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   MyNewContainer
+aa21236f5f70   postgres       "docker-entrypoint.s…"   5 hours ago   Up 18 minutes               5432/tcp                                    rails-db-1
+6e34857b6261   32d90c4848e6   "entrypoint.sh rails…"   5 hours ago   Exited (0) 5 hours ago                                                  rails_web_run_f46f6dcdf6cf
+```
+10. 'docker logs' command 
+```console
+$ docker logs c6dd952812a1 
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+```
