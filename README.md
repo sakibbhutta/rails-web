@@ -454,3 +454,10 @@ $ docker inspect 52c0f29ab16c
         }
     }
 ```
+13. 'docker port' command 
+```console
+$ docker port b5075ed4c3f0 
+3000/tcp -> 0.0.0.0:3000
+3000/tcp -> [::]:3000
+```
+14. 'docker exec' command 
