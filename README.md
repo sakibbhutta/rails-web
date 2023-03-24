@@ -1,3 +1,5 @@
+# Task 1
+
 1.  Create a directory `/rails` in LINUX environement
 2.  Create a `Dockerfile` in newly created directory with following content:
 
@@ -142,3 +144,70 @@ Created database 'myapp_test'
 ```
 
 10. Go to `http://localhost:3000` on a web browser to see the Rails Welcome.
+
+# Task 2
+1.  'docker ps' command 
+```console
+$ docker ps
+CONTAINER ID   IMAGE       COMMAND                  CREATED       STATUS          PORTS                                       NAMES
+b5075ed4c3f0   rails-web   "entrypoint.sh bash …"   4 hours ago   Up 17 seconds   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   rails-web-1
+aa21236f5f70   postgres    "docker-entrypoint.s…"   4 hours ago   Up 20 seconds   5432/tcp                                    rails-db-1
+```
+2.  'docker stop' Command
+```console
+$ docker stop
+"docker stop" requires at least 1 argument.
+See 'docker stop --help'.
+
+Usage:  docker stop [OPTIONS] CONTAINER [CONTAINER...]
+
+Stop one or more running containers
+```
+```console
+$ docker docker stop 129b1c542872 b5075ed4c3f0
+CONTAINER ID   IMAGE          COMMAND                  CREATED       STATUS                     PORTS      NAMES
+129b1c542872   rails-web      "entrypoint.sh rake …"   4 hours ago   Exited (1) 5 minutes ago              rails_web_run_78039bea7f1d
+b5075ed4c3f0   rails-web      "entrypoint.sh bash …"   4 hours ago   Exited (1) 6 seconds ago              rails-web-1
+aa21236f5f70   postgres       "docker-entrypoint.s…"   4 hours ago   Up 4 minutes (Paused)      5432/tcp   rails-db-1
+6e34857b6261   32d90c4848e6   "entrypoint.sh rails…"   5 hours ago   Exited (0) 5 hours ago                rails_web_run_f46f6dcdf6cf
+```
+3.  'docker start' command 
+```console
+$ docker start 129b1c542872 b5075ed4c3f0
+ONTAINER ID   IMAGE          COMMAND                  CREATED       STATUS                   PORTS                                       NAMES
+129b1c542872   rails-web      "entrypoint.sh rake …"   4 hours ago   Up 7 seconds             3000/tcp                                    rails_web_run_78039bea7f1d
+b5075ed4c3f0   rails-web      "entrypoint.sh bash …"   4 hours ago   Up 5 seconds             0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   rails-web-1
+aa21236f5f70   postgres       "docker-entrypoint.s…"   4 hours ago   Up 5 minutes (Paused)    5432/tcp                                    rails-db-1
+6e34857b6261   32d90c4848e6   "entrypoint.sh rails…"   5 hours ago   Exited (0) 5 hours ago                                               rails_web_run_f46f6dcdf6cf
+```
+4.  'docker pause' command 
+```console
+$ docker pause aa21236f5f70
+129b1c542872   rails-web      "entrypoint.sh rake …"   4 hours ago   Exited (1) 2 minutes ago                                                 rails_web_run_78039bea7f1d
+b5075ed4c3f0   rails-web      "entrypoint.sh bash …"   4 hours ago   Up 2 minutes                 0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   rails-web-1
+aa21236f5f70   postgres       "docker-entrypoint.s…"   4 hours ago   Up About a minute (Paused)   5432/tcp                                    rails-db-1
+6e34857b6261   32d90c4848e6   "entrypoint.sh rails…"   5 hours ago   Exited (0) 4 hours ago                                                   rails_web_run_f46f6dcdf6cf
+```
+5. 'docker unpause' command
+```console
+$ docker unpause aa21236f5f70
+CONTAINER ID   IMAGE          COMMAND                  CREATED       STATUS                     PORTS                                       NAMES
+129b1c542872   rails-web      "entrypoint.sh rake …"   4 hours ago   Exited (0) 2 seconds ago                                               rails_web_run_78039bea7f1d
+b5075ed4c3f0   rails-web      "entrypoint.sh bash …"   4 hours ago   Up About a minute          0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   rails-web-1
+aa21236f5f70   postgres       "docker-entrypoint.s…"   4 hours ago   Up 7 minutes               5432/tcp                                    rails-db-1
+6e34857b6261   32d90c4848e6   "entrypoint.sh rails…"   5 hours ago   Exited (0) 5 hours ago                                                 rails_web_run_f46f6dcdf6cf
+```
+6.  'docker rename' command
+```console
+$ docker rename b5075ed4c3f0 MyNewContainer
+CONTAINER ID   IMAGE          COMMAND                  CREATED       STATUS                     PORTS                                       NAMES
+129b1c542872   rails-web      "entrypoint.sh rake …"   4 hours ago   Exited (0) 3 minutes ago                                               rails_web_run_78039bea7f1d
+b5075ed4c3f0   rails-web      "entrypoint.sh bash …"   4 hours ago   Up 4 minutes               0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   MyNewContainer
+aa21236f5f70   postgres       "docker-entrypoint.s…"   4 hours ago   Up 10 minutes              5432/tcp                                    rails-db-1
+6e34857b6261   32d90c4848e6   "entrypoint.sh rails…"   5 hours ago   Exited (0) 5 hours ago                                                 rails_web_run_f46f6dcdf6cf
+```
+7.  'docker top' command
+```console
+$ docker top b5075ed4c3f0
+UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+root                12398               12378               1                   15:16               ?                   00:00:05            puma 3.12.6 (tcp://0.0.0.0:3000) [myapp]
